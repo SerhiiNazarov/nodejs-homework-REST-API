@@ -4,14 +4,7 @@ const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const { nanoid } = require("nanoid");
 
-const {
-  HttpError,
-  ctrlWrapper,
-  sendEmail,
-  // sendEmailNodemailer,
-} = require("../../helpers");
-
-const { BASE_URL } = process.env;
+const { HttpError, ctrlWrapper } = require("../../helpers");
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -32,18 +25,10 @@ const register = async (req, res) => {
     verificationToken,
   });
 
-  const verifyEmail = {
-    to: email,
-    subject: "Verify email",
-    html: `<a target="_blank" href="${BASE_URL}/api/auth/users/verify/${verificationToken}">Click verify email</a>`,
-  };
-
-  await sendEmail(verifyEmail);
-
   res.status(201).json({
     user: {
+      name: newUser.name,
       email: newUser.email,
-      subscription: newUser.subscription,
     },
   });
 };

@@ -8,16 +8,11 @@ const { SECRET_KEY } = process.env;
 const { HttpError, ctrlWrapper } = require("../../helpers");
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   const user = await User.findOne({ email });
-  const subscription = user.subscription;
 
   if (!user) {
-    throw HttpError(401, "Email or password invalid");
-  }
-
-  if (!user.verify) {
-    throw HttpError(401, "Email not verified");
+    throw HttpError(401, "Email or password wrong");
   }
 
   const passwordCompare = await bcrypt.compare(password, user.password);
@@ -37,8 +32,8 @@ const login = async (req, res) => {
   res.status(200).json({
     token,
     user: {
+      name,
       email,
-      subscription,
     },
   });
 };
