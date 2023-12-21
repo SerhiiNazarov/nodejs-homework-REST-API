@@ -3,6 +3,9 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const { nanoid } = require("nanoid");
+const jwt = require("jsonwebtoken");
+
+const { SECRET_KEY } = process.env;
 
 const { HttpError, ctrlWrapper } = require("../../helpers");
 
@@ -25,7 +28,12 @@ const register = async (req, res) => {
     verificationToken,
   });
 
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+
+  await User.findByIdAndUpdate(user._id, { token });
+
   res.status(201).json({
+    token,
     user: {
       name: newUser.name,
       email: newUser.email,
