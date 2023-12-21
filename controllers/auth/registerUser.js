@@ -28,7 +28,7 @@ const register = async (req, res) => {
     verificationToken,
   });
 
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+  const token = jwt.sign(SECRET_KEY, { expiresIn: "23h" });
 
   await User.findByIdAndUpdate(user._id, { token });
 
