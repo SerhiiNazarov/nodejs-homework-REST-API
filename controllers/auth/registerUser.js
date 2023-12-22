@@ -3,9 +3,9 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const { nanoid } = require("nanoid");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
-const { SECRET_KEY } = process.env;
+// const { SECRET_KEY } = process.env;
 
 const { HttpError, ctrlWrapper } = require("../../helpers");
 
