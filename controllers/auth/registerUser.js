@@ -28,12 +28,11 @@ const register = async (req, res) => {
     verificationToken,
   });
 
-  const token = jwt.sign(SECRET_KEY, { expiresIn: "22h" });
+  // const token = jwt.sign(SECRET_KEY, { expiresIn: "22h" });
 
-  await User.findByIdAndUpdate(user._id, { token });
+  // await User.findByIdAndUpdate(user._id, { token });
 
   res.status(201).json({
-    token,
     user: {
       name: newUser.name,
       email: newUser.email,
