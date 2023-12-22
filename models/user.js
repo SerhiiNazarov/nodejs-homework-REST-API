@@ -17,20 +17,8 @@ const userSchema = new Schema(
       // match: emailRegexp,
       unique: true,
     },
-    token: {
-      type: String,
-      default: "",
-    },
     avatarURL: {
       type: String,
-    },
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-      required: [true, "Verify token is required"],
     },
     name: {
       type: String,

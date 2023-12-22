@@ -8,7 +8,7 @@ const {
   updateAvatar,
 } = require("../../controllers/auth");
 
-const { validateBody, authenticate, upload } = require("../../middlewares");
+const { validateBody, upload } = require("../../middlewares");
 
 const { schemas } = require("../../models/user");
 
@@ -18,15 +18,10 @@ router.post("/users/register", validateBody(schemas.registerSchema), register);
 
 router.post("/users/login", validateBody(schemas.loginSchema), login);
 
-router.get("/users/current", authenticate, getCurrent);
+router.get("/users/current", getCurrent);
 
-router.post("/users/logout", authenticate, logout);
+router.post("/users/logout", logout);
 
-router.patch(
-  "/users/avatars",
-  authenticate,
-  upload.single("avatar"),
-  updateAvatar
-);
+router.patch("/users/avatars", upload.single("avatar"), updateAvatar);
 
 module.exports = router;
