@@ -5,10 +5,10 @@ const {
   login,
   getCurrent,
   logout,
-  updateAvatar,
+  // updateAvatar,
 } = require("../../controllers/auth");
 
-const { validateBody, upload } = require("../../middlewares");
+const { validateBody } = require("../../middlewares");
 
 const { schemas } = require("../../models/user");
 
@@ -22,6 +22,6 @@ router.get("/users/current", getCurrent);
 
 router.post("/users/logout", logout);
 
-router.patch("/users/avatars", upload.single("avatar"), updateAvatar);
+// router.patch("/users/avatars", upload.single("avatar"), updateAvatar);
 
 module.exports = router;
