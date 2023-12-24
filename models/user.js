@@ -17,6 +17,10 @@ const userSchema = new Schema(
       // match: emailRegexp,
       unique: true,
     },
+    token: {
+      type: String,
+      default: "",
+    },
     avatarURL: {
       type: String,
     },
