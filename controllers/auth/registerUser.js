@@ -27,13 +27,15 @@ const register = async (req, res) => {
 
   await User.create(newUser);
 
+  const createdUser = await User.findOne({ email });
+
   const payload = {
-    id: newUser._id,
+    id: createdUser._id,
   };
 
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
 
-  await User.findByIdAndUpdate(newUser._id, { token });
+  await User.findByIdAndUpdate(createdUser._id, { token });
 
   res.status(201).json({
     token,
